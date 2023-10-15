@@ -80,3 +80,32 @@ Linking helloworld ....
 > 将程序复制到文件,然后在同目录运行`ghc hello.hs -o testprogram`
 > </details>
 
+## 与Haskell交互------GHCi
+
+编写Haskell程序最常用的工具之一是GHCi，一个用于GHC的交互式接口。和GHC一样，GHCi也以一个简单的命令开始:`GHCi`。启动GHCi后，你会看到一个新的提示符:
+```
+$ ghci
+GHCi> 
+```
+
+本书中`GHCi>`表示该行在GHCi内输入;由GHCi输出的行以空白开头。从命令行开始学习任何程序时，首先要了解如何结束它!对于GHCi，你可以使用`:q`命令来退出:
+```
+$ ghci
+GHCi> :q
+Leaving GHCi.
+```
+
+
+使用GHCi很像使用大多数解释型语言(如Python和Ruby)中的解释器。它可以用作一个简单的计算器:
+```
+GHCi> 1 + 1
+2
+```
+
+你也可以在GHCi中动态编写代码:
+```
+GHCi> x = 2 + 2
+GHCi> x
+4
+```
+
