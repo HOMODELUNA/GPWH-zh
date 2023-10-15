@@ -1,0 +1,6 @@
+[book]
+authors = ["homodeluna"]
+language = "zh_cn"
+multilingual = false
+src = "src"
+title = "Haskell 上手"
