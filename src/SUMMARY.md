@@ -1,3 +1,6 @@
 # Summary
 
 - [Haskell上手](1-getting-started-with-haskell.md)
+
+# 函数式编程基础
+- [引言 & 函数与函数式编程](2-functions-and-functional-programming.md)

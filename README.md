@@ -52,3 +52,33 @@ main = do --程序的main函数
 > <details><summary>答案</summary> 
 > 将程序复制到文件,然后在同目录运行`ghc hello.hs -o testprogram`
 > </details>
+
+如果小测答案里含有代码块,尽量用`<pre><code>`标签.
+```markdown
+> 小测: 编辑你的Hello World脚本使其输出Hello &lt;Name&gt;,其中&lt;Name&gt;是你的名字。在GHCi中重新加载这个脚本.
+> <details><summary>答案</summary>
+> 如此更改文件:
+> <pre><code class="language-haskell">main = do 
+>   print "Hello Will!"
+> </code></pre>
+> 在GHCi中加载文件:
+> <pre><code>GHCi> :l hello.hs
+> GHCi> main
+> Hello Will!
+> </code></pre>
+> </details>
+```
+这段代码会生成:
+
+> 小测: 编辑你的Hello World脚本使其输出Hello &lt;Name&gt;,其中&lt;Name&gt;是你的名字。在GHCi中重新加载这个脚本.
+> <details><summary>答案</summary>
+> 如此更改文件:
+> <pre><code class="language-haskell">main = do 
+>   print "Hello Will!"
+> </code></pre>
+> 在GHCi中加载文件:
+> <pre><code>GHCi> :l hello.hs
+> GHCi> main
+> Hello Will!
+> </code></pre>
+> </details>

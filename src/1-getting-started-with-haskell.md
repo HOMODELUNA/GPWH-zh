@@ -10,7 +10,7 @@
 在深入学习Haskell之前，您需要熟悉您将在旅程中使用的基本工具。本课将引导您接触Haskell。这一课从下载编写、编译和运行Haskell程序的基础知识开始。然后，请阅读示例代码，并思考如何用Haskell编写代码。千里之行,始于足下.
 
 ### Haskell Platform
-学习一门新的编程语言最糟糕的部分是第一次搭建开发环境。幸运，甚至有些惊讶的是，这在Haskell中根本不是问题。Haskell社区已经整合了一个单一的、开箱即用的工具包，称为Haskell Platform。\footnote{ }
+学习一门新的编程语言最糟糕的部分是第一次搭建开发环境。幸运，甚至有些惊讶的是，这在Haskell中根本不是问题。Haskell社区已经整合了一个单一的、开箱即用的工具包，称为Haskell Platform.
 
 > 译注: 不幸的是,Haskell Platform 自2022年就已经[被弃用了](https://www.haskell.org/platform). 目前(2023年)Haskell社区推荐使用[ghcup](https://www.haskell.org/ghcup)来管理Haskell版本
 
@@ -108,4 +108,215 @@ GHCi> x = 2 + 2
 GHCi> x
 4
 ```
+在GHCi版本8之前，函数和变量定义需要以let关键字开头。现在已经不需要这么做了，但网上和很多旧Haskell书中仍然有这个示例:
+```
+GHCi> let f x = x + x
+GHCi> f 2
+4
+```
+
+GHCi最重要的用途是与你正在编写的程序交互。有两种方法可以将现有文件加载进GHCi。一种是将文件名作为参数传递给ghci:
+
+```
+$ ghci hello.hs
+[1 of 1] Compiling Main
+Ok, modules loaded: Main.
+```
+另一种方法是在交互状态使用 `:l` (或 `:load`) 命令:
+```
+$ ghci
+GHCi> :l hello.hs
+[1 of 1] Compiling Main
+Ok, modules loaded: Main.
+```
+ 不论哪种情况,你都可以调用写好的函数:
+```
+GHCi> :l hello.hs
+GHCi> main
+"Hello World!"
+```
+
+
+不同于在GHC的编译文件，你的文件不需要`main`函数就可以加载到GHCi中。载入文件时，已有的函数和变量定义会被覆盖。您可以在编写和更改文件不断加载它。Haskell的独特之处在于既具有强大的编译器支持,又有自然且易于使用的交互环境。如果你使用的是Python、Ruby或JavaScript等解释型语言，那么使用GHCi就会感觉非常自在。如果您熟悉Java、C#或c++等编译语言，那么在编写Haskell时，您可能会惊讶于你使用的Haskell是编译语言.
+
+> 小测: 编辑你的Hello World脚本使其输出Hello &lt;Name&gt;,其中&lt;Name&gt;是你的名字。在GHCi中重新加载这个脚本.
+> <details><summary>答案</summary>
+> 如此更改文件:
+> <pre><code class="language-haskell">main = do 
+>   print "Hello Will!"
+> </code></pre>
+> 在GHCi中加载文件:
+> <pre><code>GHCi> :l hello.hs
+> GHCi> main
+> Hello Will!
+> </code></pre>
+> </details>
+
+## Haskell 工作流
+
+对于Haskell新手来说，首当其冲的问题是，Haskell的基本I/O反而是相当高级的话题。你接触一门语言时，往往是一边打印输出,一边理解程序的工作原理.可是在Haskell中，这样的临时调试通常不可能。在Haskell程序中很容易出现bug，伴随一堆相当复杂的错误，你很可能绷住,完全不知道如何继续。
+
+好巧不巧,Haskell _出色的_ 编译器会对代码的正确性斤斤计较。如果你习惯于编写一个程序，运行它，并快速地修复你犯的任何错误，你就会收到一些小小的haskell震撼了。Haskell强烈鼓励在运行程序之前先把问题想清楚。等到你积累了足够的经验，我相信曾经挫折你的东西会成为你最喜欢的语言特性。在编译过程中磨砺正确性的另一面是，程序会正确工作，并且正确会成为日常,而不需要多次调试出来。
+
+有个办法可以比较无痛地编写Haskell代码: 每次写一小点,交互式地运行它以验证结果。为了演示这一点，我们将选取一个混乱的Haskell程序，并一片一片地整理它，直到其易于理解。在这个示例中，你将编写一个命令行应用程序，起草作者发给读者的感谢信。下面是这个程序的第一个版本,写得很糟糕:
+
+> first_prog.hs 的糟糕版本
+```haskell
+messyMain :: IO()
+messyMain = do
+  print "Who is the email for?"
+  recipient <- getLine
+  print "What is the Title?"
+  title <- getLine
+  print "Who is the Author?"
+  author <- getLine
+  print ("Dear " ++ recipient ++ ",\n" ++
+    "Thanks for buying " ++ title  ++ "\nthanks,\n" ++
+    author )
+```
+
+问题主要是这些代码全都混在这个大函数`messyMain`中。编写模块化代码在软件开发中普遍是良好实践, Haskell更进一步，要求你的代码便于理解和排查. 这个程序尽管乱，还是能跑。如果把`messyMain`的名字改成`main`，它就能编译运行了。你可以直接将这些代码加载到GHCi中，假设你和first_prog.hs在同一个目录下:
+```
+$ghci
+GHCi> :l first_prog.hs
+[1 of 1] Compiling Main     ( first_prog.hs, interpreted )
+Ok, modules loaded: Main.
+```
+如果你得到了GHCi的`Ok`，你就知道你的代码已经编译并能正常工作了!注意，GHCi并不关心你是否有一个主函数。因为你还要与没有`main`的文件进行交互。现在可以测试你的代码了:
+
+```
+GHCi> messyMain
+"Who is the email for?"
+Happy Reader
+"What is the Title?"
+Learn Haskell
+"Who is the Author?"
+Will Kurt
+"Dear Happy Reader,\nThanks for buying Learn Haskell\nthanks,\nWill Kurt"
+```
+
+一切正常，但这段代码如果稍微分解一下，就会好看得多。你的主要目标是创建一封电子邮件，但很容易看出电子邮件由三个部分组成:抬头、正文和签名。首先将生成这些部分的函数提取出来。下面的代码在first_prog.hs写入,本书中定义的几乎所有函数和值都可以假设写入到你正在使用的文件中。我们将从`toPart`函数开始:
+```haskell
+toPart recipient = "Dear" ++ recipient ++ ",\n"
+```
+
+在这个例子中，你可以很容易一口气写出这三个函数，但通常你值得放慢脚步，每写完一个就测试一个。为了测试这个函数，再次在GHCi中加载你的文件:
+
+```
+GHCi> :l "first_prog.hs"
+[1 of 1] Compiling Main  ( first_prog.hs, interpreted )
+Ok, modules loaded: Main.
+GHCi> toPart "Happy Reader"
+"DearHappy Reader,\n"
+GHCi> toPart "Bob Smith"
+"DearBob Smith,\n"
+```
+在编辑器中编写代码，然后一遍一遍将其加载进GHCi，这种使用代码的模式将贯穿全书。为避免重复，我们假定使用`:l "first_prog.hs"` ,不再特别写出。现在你已经将它加载到GHCi了，你会看到有一个小错误，Dear和收件人的名字之间缺少一个空格。让我们看看如何解决这个问题。
+```haskell
+-- 更正后
+ toPart recipient = "Dear " ++ recipient ++ ",\n"
+```
+回到 GHCi:
+
+```
+GHCi> toPart "Jane Doe"
+"Dear Jane Doe,\n"
+```
+好极了。现在来定义另外两个函数。这次就一口气写出来吧。我仍然要说,在以后的学习中，一次写一个函数，将其加载到GHCi中，保证它正确,再去写下一个,稳一些总没有坏处.
+
+```haskell
+bodyPart bookTitle = "Thanks for buying " ++ bookTitle ++ ".\n"
+fromPart author = "Thanks,\n"++author
+```
+测试方法同理:
+
+```
+GHCi> bodyPart "Learn Haskell"
+"Thanks for buying Learn Haskell.\n"
+GHCi> fromPart "Will Kurt"
+"Thanks,\nWill Kurt"
+```
+一切正常.现在让我们把所有元素综合在一起:
+```haskell
+createEmail recipient bookTitle author = toPart recipient ++
+                                         bodyPart bookTitle ++
+                                         fromPart author
+```
+
+注意这三个函数调用的对齐方式。Haskell确实用缩进表示语义(但不像Python那样强调)。假定本文中的任何格式都是有意为之;如果代码段对齐，那肯定是有原因的。大多数编辑器都可以通过Haskell插件自动处理缩进。
+
+写好所有函数后，就可以测试`createEmail`了:
+
+```haskell
+GHCi> createEmail "Happy Reader" "Learn Haskell" "Will Kurt"
+"Dear Happy Reader,\nThanks for buying Learn Haskell.\nThanks,\nWill Kurt"
+```
+你的函数正常运行.现在在`main`中把它们组合起来:
+```haskell
+-- first_prog.hs 的main,现在好看些了
+main = do
+  print "Who is the email for?"
+  recipient <- getLine
+  print "What is the Title?"
+  title <- getLine
+  print "Who is the Author?"
+  author <- getLine
+  print (createEmail recipient title author)
+```
+
+你应该准备好编译了,当然你可以在 GHCi 中测试函数,不过这不是必须的:
+
+```
+GHCi> main
+"Who is the email for?"
+ Happy Reader
+"What is the Title?"
+Learn Haskell
+"Who is the Author?"
+Will Kurt
+"Dear Happy Reader,\nThanks for buying Learn Haskell.\nThanks,\nWill Kurt"
+```
+
+既然你把具体的组件组装起来了，并且你能够单独测试它们的行为,保证马哥组件都正常工作。那么，你可以编译了:
+
+```
+$ ghc first_prog.hs 
+[1 of 1] Compiling Main     ( first_prog.hs, first_prog.o )
+Linking first_prog ...
+$ ./first_prog 
+"Who is the email for?"
+Happy Reader
+"What is the Title?"
+Learn Haskell
+"Who is the Author?"
+Will Kurt
+"Dear Happy Reader,\nThanks for buying Learn Haskell.\nThanks,\nWill Kurt"
+```
+
+这是你编写的第一个有工作意义的Haskell程序。了解了基本的工作流程后，您现在可以深入Haskell的神奇世界了!
+
+> 译注: 在上面的程序中,你有没有注意到,每次你获取一个项时,先打印一个提示语句,然后获取用户输入,这个过程本身就可以抽象出来.如果你了解python 的`input`函数,就会知道它的一个参数就是提示语句.由此,我们可以进一步化简这个程序:
+> ```haskell
+> ask :: String -> IO String
+> ask prompt = putStrLn prompt >> getLine
+> ```
+> 然后这个`main`还能进一步化简:
+> ```haskell
+> main :: IO ()
+> main = do   -- 欢迎来到抽象的 Haskell !
+>   recipient <- ask "Who is the email for?"
+>   title     <- ask "What is the Title?"
+>   author    <- ask "Who is the Author?"  
+>   print (createEmail recipient title author)
+> ```
+> 至于这个`ask`函数的类型是什么意思, 它为什么能像`getLine`一样用`<-`取值, `putStrLn` 和 `getLine` 中间的 `>>` 又是什么? 前面的区域以后再来探索吧.
+
+## 总结
+
+在这一课中,你的目标就是迈出使用Haskell的第一步。你首先安装了Haskell的工具,包括编译器GHC, 交互式解释器GHCi,以及本书后面要用的构建工具stack。本课的其余部分涵盖了编写、重构、运行和编译Haskell程序交互和编译的基础知识。现在来做两个练习吧:
+
+**Q1.1** 在GHCi中求2<sup>123</sup>.
+
+**Q1.2** 修改first_prog.hs中每个函数的文本,同时在GHCi中测试它们，最后，编译一个新版本的电子邮件模板程序，使可执行文件命名为email。
+
 
