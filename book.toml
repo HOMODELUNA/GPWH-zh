@@ -4,3 +4,6 @@ language = "zh_cn"
 multilingual = false
 src = "src"
 title = "Haskell 上手"
+
+[output.html]
+mathjax-support = true

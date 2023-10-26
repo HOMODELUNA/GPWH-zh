@@ -1,0 +1,25 @@
+<svg width="580" height="400" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <g>
+  <title>background</title>
+  <rect fill="#fff" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <text xml:space="preserve" text-anchor="start" font-family="'Courier New', Courier, monospace" font-size="24" id="svg_2" y="179.112494" x="173.499992" stroke-width="0" stroke="#000" fill="#000000">simple x = x</text>
+  <text xml:space="preserve" text-anchor="start" font-family="'Times New Roman', Times, serif" font-size="24" id="svg_3" y="63" x="95.499994" stroke-width="0" stroke="#000" fill="#000000">函数名</text>
+  <text xml:space="preserve" text-anchor="start" font-family="'Times New Roman', Times, serif" font-size="24" id="svg_4" y="63.112496" x="213.499992" stroke-width="0" stroke="#000" fill="#000000">函数至少有一个参数</text>
+  <text xml:space="preserve" text-anchor="start" font-family="'Times New Roman', Times, serif" font-size="24" id="svg_5" y="280.112492" x="90" stroke-width="0" stroke="#000" fill="#000000">所有Haskell函数</text>
+  <text xml:space="preserve" text-anchor="start" font-family="'Times New Roman', Times, serif" font-size="24" id="svg_6" y="320" x="90" stroke-width="0" stroke="#000" fill="#000000">必须以小写字母开头</text>
+  <text xml:space="preserve" text-anchor="start" font-family="'Times New Roman', Times, serif" font-size="24" id="svg_7" y="240" x="336.49999" stroke-width="0" stroke="#000" fill="#000000">这是函数的行为</text>
+  <text xml:space="preserve" text-anchor="start" font-family="'Times New Roman', Times, serif" font-size="24" id="svg_8" y="280" x="336" stroke-width="0" stroke="#000" fill="#000000">目前它只是原样</text>
+  <text style="cursor: move;" xml:space="preserve" text-anchor="start" font-family="'Times New Roman', Times, serif" font-size="24" id="svg_9" y="320" x="336" stroke-width="0" stroke="#000" fill="#000000">返回其参数</text>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_11" y2="153.112495" x2="205.499992" y1="74" x1="128.499993" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="none"/>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_12" y2="255.112493" x2="174.499992" y1="191.112494" x1="208.499992" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="none"/>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_13" y2="153" x2="281.499991" y1="74.112496" x1="309.49999" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="none"/>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_14" y2="214.112494" x2="408.499989" y1="183.112494" x1="352.49999" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="none"/>
+ </g>
+</svg>
