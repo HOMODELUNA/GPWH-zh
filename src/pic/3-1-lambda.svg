@@ -1,0 +1,15 @@
+<svg width="800" height="300" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>Layer 1</title>
+  <text xml:space="preserve" text-anchor="start" font-family="'Roboto Mono'" font-size="24" id="svg_1" y="160" x="227.19999" stroke-width="0" stroke="#000" fill="#000000">\x -&gt; x</text>
+  <text style="cursor: move;" xml:space="preserve" text-anchor="start" font-family="'Roboto Mono'" font-size="24" id="svg_2" y="70" x="80" stroke-width="0" stroke="#000" fill="#000000">反斜杠类似希腊字母</text>
+  <text xml:space="preserve" text-anchor="start" font-family="'Roboto Mono'" font-size="24" id="svg_3" y="110" x="80" stroke-width="0" stroke="#000" fill="#000000">lambda(λ)</text>
+  <text xml:space="preserve" text-anchor="start" font-family="'Roboto Mono'" font-size="24" id="svg_4" y="84.8" x="355.19999" stroke-width="0" stroke="#000" fill="#000000">参数</text>
+  <text xml:space="preserve" text-anchor="start" font-family="'Roboto Mono'" font-size="24" id="svg_5" y="200" x="399" stroke-width="0" stroke="#000" fill="#000000">函数体可以和</text>
+  <text xml:space="preserve" text-anchor="start" font-family="'Roboto Mono'" font-size="24" id="svg_6" y="240" x="256" stroke-width="0" stroke="#000" fill="#000000">普通函数的函数体一样复杂</text>
+  <line id="svg_7" y2="128.8" x2="230.2" y1="83.8" x1="234.2" stroke="#000" fill="none"/>
+  <line id="svg_8" y2="141.8" x2="256.19999" y1="91.8" x1="374.19999" stroke="#000" fill="none"/>
+  <line id="svg_9" y2="200.8" x2="380.19999" y1="167.8" x1="324.19999" stroke="#000" fill="none"/>
+ </g>
+</svg>
