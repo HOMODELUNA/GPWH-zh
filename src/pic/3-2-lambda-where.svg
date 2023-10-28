@@ -1,0 +1,23 @@
+<svg width="1100" height="360" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>Layer 1</title>
+  <rect rx="20" id="svg_7" height="159" width="421.99999" y="112.8" x="431.2" stroke-width="0" stroke="#000" fill="#FFFF91"/>
+  <rect rx="10" id="svg_8" height="30" width="140" y="120" x="464" stroke-width="0" stroke="#000" fill="#729C62"/>
+  <rect stroke="#000" rx="10" id="svg_10" height="30" width="140" y="120" x="608" stroke-width="0" fill="#529D94"/>
+  <text xml:space="preserve" text-anchor="start" font-family="'monospace'" font-size="24" id="svg_2" y="140" x="50" stroke-width="0" stroke="#000" fill="#000000">sumSquareOrSquareSum x y = (\sumSquare squareSum -&gt;</text>
+  <text xml:space="preserve" text-anchor="start" font-family="'monospace'" font-size="24" id="svg_3" y="180" x="490" stroke-width="0" stroke="#000" fill="#000000">if sumSquare &gt; squareSum</text>
+  <text xml:space="preserve" text-anchor="start" font-family="'monospace'" font-size="24" id="svg_4" y="220" x="490" stroke-width="0" stroke="#000" fill="#000000">then sumSquare</text>
+  <rect stroke="#000" rx="10" id="svg_9" height="30" width="164" y="237" x="733" stroke-width="0" fill="#729C62"/>
+  <rect stroke="#000" rx="10" id="svg_11" height="30" width="140" y="238" x="903" stroke-width="0" fill="#529D94"/>
+  <text xml:space="preserve" text-anchor="start" font-family="'monospace'" font-size="24" id="svg_5" y="258" x="490" stroke-width="0" stroke="#000" fill="#000000">else squareSum ) (x^2 + y^2) ((x+y)^2)</text>
+  <text xml:space="preserve" text-anchor="start" font-family="'monospace'" font-size="24" id="svg_12" y="301.79999" x="429.2" stroke-width="0" stroke="#000" fill="#845335">lambda的函数体</text>
+  <text xml:space="preserve" text-anchor="start" font-family="'monospace'" font-size="24" id="svg_13" y="49.8" x="448.2" stroke-width="0" stroke="#000" fill="#529D94">传进去的参数</text>
+  <line id="svg_20" y2="80" x2="534.2" y1="108.8" x1="534.2" stroke-width="5" stroke="#000" fill="none"/>
+  <line id="svg_21" y2="80" x2="866.19999" y1="229.8" x1="866.19999" stroke-width="5" stroke="#000" fill="none"/>
+  <line id="svg_22" y2="80" x2="866" y1="80" x1="534" stroke-width="5" stroke="#000" fill="none"/>
+  <line id="svg_23" y2="60" x2="678.19999" y1="112.8" x1="678.19999" stroke-width="5" stroke="#000" fill="none"/>
+  <line id="svg_24" y2="229.80303" x2="961.19999" y1="60" x1="961.19999" stroke-width="5" stroke="#000" fill="none"/>
+  <line id="svg_25" y2="60" x2="961" y1="60" x1="678" stroke-width="5" stroke="#000" fill="none"/>
+ </g>
+
+</svg>
