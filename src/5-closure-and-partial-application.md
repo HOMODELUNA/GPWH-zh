@@ -11,19 +11,6 @@
 这一课介绍函数式编程的最后一个关键元素:闭包。**闭包**是使用lambda函数和一等函数的必然结果。通过组合这些lambda函数和一等函数来创建闭包，你可以动态地创建函数。事实证明，这是一个非常强大的抽象，尽管是最需要花时间习惯的。Haskell允许创建部分应用闭包，这让闭包的使用变得更加容易。本课结束时，您将了解部分应用如何使原本令人困惑的闭包更容易使用。
 
 
-Consider this :In the preceding lesson, you learned how to pass in programming logic
-to other functions because of first-class functions. For example, you might have a getPrice function that takes a URL and a website-specific price-extraction function:
-
-getPrice amazonExtractor url
-
-Although this is useful, what happens if you need to extract items from 1,000 URLs, but
-all using amazonExtractor? Is there a way to capture this argument on the fly so you have
-to pass in only the url parameter for future calls?
-
-
-
-
-
 > **考虑这个**:在前一课中，我们学习了如何利用一等函数将编程逻辑传递给其他函数。例如，你可能有一个`getPrice`函数，它接受一个URL和一个特定于网站的价格提取函数:
 > ```haskell
 > getPrice amazonExtractor url
