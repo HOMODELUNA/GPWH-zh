@@ -7,3 +7,4 @@
 - [Lambda 函数与语法作用域](3-lambda-funxtion-and-lexical-scope.md)
 - [一等函数](4-first-class-function.md)
 - [闭包与部分应用](5-closure-and-partial-application.md)
+- [列表](6-lists.md)
