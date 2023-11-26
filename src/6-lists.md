@@ -143,4 +143,198 @@ stillLongList = simple longList
 > 那么你触动了对其的求值,这个求值过程就没有尽头了.
 > </details>
 
+## 常用列表函数
 
+由于列表非常重要，Haskell的标准库模块Prelude中内置了大量常用的函数。到目前为止，我们已经见过`head`、`tail`、`:`和`++`，它们允许你将列表拆开并重新组合在一起。在编写Haskell时，还有许多列表函数会频繁出现，因此值得您掌握。
+
+###  `!!` 运算符
+如果希望通过索引访问列表中的特定元素，可以使用`!!`操作符。`!!`操作符接受一个列表和一个数字，返回列表中该位置的元素。Haskell中的列表从0开始索引。如果你试图访问列表末尾以外的值，就会得到一个错误:
+
+```
+GHCi> [1,2,3] !! 0
+1
+GHCi> "puppies" !! 4
+'i'
+GHCi> [1..10] !! 11
+*** Exception: Prelude.!!: index too large
+```
+
+如第5课所述，任何中缀操作符(位于两个值之间的操作符，如`+`)也可以像前缀函数一样使用，只需将其包装在括号中:
+
+```
+GHCi> (!!) [1,2,3] 0
+1
+```
+
+使用前缀表示法可以使诸如部分应用的事情变得更容易。前缀表示法对于使用操作符作为其他函数的参数也很有用。您仍然可以使用带有中缀运算符的部分应用表达式;你只需要把表达式用圆括号括起来:
+
+```
+GHCi> paExample1 = (!!) "dog"
+GHCi> paExample1 2
+'g'
+GHCi> paExample2 = ("dog" !!)
+GHCi> paExample2 2
+'g'
+```
+
+注意，在`paExample2`中，你会看到部分应用是如何使用中缀二元运算符的。要对二元运算符(称为节)执行部分应用，需要将表达式包裹在括号中。如果只包含右边的参数，函数会等待最左边的参数;如果你只在左边包含参数，就会得到一个等待右边参数的函数。下面是`paExample3`，它创建了对右参数的部分应用:
+
+```
+GHCi> paExample3 = (!! 2)
+GHCi> paExample3 "dog"
+'g'
+```
+
+关于部分应用节，要记住，括号不是可选的。
+
+### `length`
+
+顾名思义;它给出了列表的长度!
+```
+GHCi> length [1..20]
+20
+GHCi> length [(10,20),(1,2),(15,16)]
+3
+GHCi> length "quicksand"
+9
+```
+
+### `reverse`
+`reverse` 从头到尾翻转这个列表:
+```
+GHCi> reverse [1,2,3]
+[3,2,1]
+GHCi> reverse "cheese"
+"eseehc"
+```
+> 译注: 这就要求了,length,reverse 等等所应用的列表必须是有尽的.否则它们就不会停下.
+
+您可以使用`reverse`来创建一个基本的回文检查器，如下面的代码所示。
+
+```
+isPalindrome word = word == reverse word
+GHCi> isPalindrome "cheese"
+False
+GHCi> isPalindrome "racecar"
+True
+GHCi> isPalindrome [1,2,3]
+False
+GHCi> isPalindome [1,2,1]
+True
+```
+
+### `elem`
+
+`elem`函数接受一个值和一个列表，并检查该值是否在列表中:
+
+
+```
+GHCi> elem 13 [0,13 .. 100]
+True
+GHCi> elem 'p' "cheese"
+False
+```
+
+为了提高可读性，您可能希望将`elem`函数视为中缀操作符。任何二元函数都可以被视为中缀运算符，只需将其括在反引号(`` ` `` )中。例如，函数`response`根据字符串是否有感叹号返回不同的响应，如下所示。
+
+```
+respond phrase = if '!' `elem` phrase
+                 then "wow!"
+                 else "uh.. okay"
+GHCi> respond "hello"
+"uh.. okay"
+GHCi> respond "hello!"
+"wow!"
+```
+
+中缀`elem`是否增加可读性确实是有争议的，但在现实世界中，您会经常遇到中缀形式的二元函数。
+
+
+### `take` 与 `drop`
+
+take函数接受一个数字和一个列表作为参数，然后返回列表的前n个元素:
+```
+GHCi> take 5 [2,4..100]
+[2,4,6,8,10]
+GHCi> take 3 "wonderful"
+"won"
+```
+
+如果你需要比列表长度更多的值，`take`尽可能多给你一些值，即已有的整个列表，不会发生错误:
+
+```
+GHCi> take 1000000 [1]
+[1]
+```
+
+`take`与列表中的其他函数结合使用效果最好。例如，您可以将`take`与`reverse`组合以获得列表的最后n个元素。
+
+```
+takeLast n aList = reverse (take n (reverse aList))
+GHCi> takeLast 10 [1..100]
+[91,92,93,94,95,96,97,98,99,100]
+```
+drop函数类似于take，不同之处在于它删除列表的前n个元素,并返回给你剩下的列表:
+
+```
+GHCi> drop 2 [1,2,3,4,5]
+[3,4,5]
+GHCi> drop 5 "very awesome"
+"awesome"
+```
+
+###  `zip`
+
+当您想要将两个列表组合成元组对的列表时，可以使用`zip`。`zip`的参数是两个列表。如果一个列表较长，当两个列表中有一个为空时，`zip`将停止:
+```
+GHCi> zip [1,2,3] [2,4,6]
+[(1,2),(2,4),(3,6)]
+GHCi> zip "dog" "rabbit"
+[('d','r'),('o','a'),('g','b')]
+GHCi> zip ['a' .. 'f'] [1 .. ]
+[('a',1),('b',2),('c',3),('d',4),('e',5),('f',6)]
+```
+
+### `cycle`
+
+`cycle`函数特别有趣，因为它使用惰性求值来创建无限列表。给定一个列表，`cycle`无限地重复这个列表。这可能看起来没什么用，但在很多情况下都很有用。例如，在数值计算中，通常需要一个包含n个1的列表。有了`cycle`，这个函数很容易实现。
+
+
+```
+ones n = take n (cycle [1])
+GHCi> ones 2
+[1,1]
+GHCi> ones 4
+[1,1,1,1]
+```
+在对列表成员进行分组时，Cycle非常有用。假设你想把一组文件分到n台服务器上，或者类似地把员工分到n个团队。一般的解决方案是创建一个新的函数assignToGroups，它接受一些组和一个列表，然后循环遍历组，为它们分配成员。
+
+```
+assignToGroups n aList = zip groups aList
+    where groups = cycle [1..n]
+
+GHCi> assignToGroups 3 ["file1.txt","file2.txt","file3.txt","file4.txt","file5.txt","file6.txt","file7.txt","file8.txt"] 
+
+[(1,"file1.txt"),(2,"file2.txt"),(3,"file3.txt"),(1,"file4.txt"),(2,"file5.txt"),(3,"file6.txt"),(1,"file7.txt"),(2,"file8.txt")]
+
+GHCi> assignToGroups 2 ["Bob","Kathy","Sue","Joan","Jim","Mike"]
+[(1,"Bob"),(2,"Kathy"),(1,"Sue"),(2,"Joan"),(1,"Jim"),(2,"Mike")]
+```
+
+这些函数只是Haskell提供的众多列表函数中比较常见的一些。并非列表上的所有函数都包含在标准的`Prelude`模块中。所有的列表函数，包括那些自动包含在`Prelude`中的，都在`Data.List`中。详尽的数据列表。[标准Haskell文档](https://hackage.haskell.org/package/basedocs/Data-List.html)可以在线查阅列表函数。
+
+## 总结
+
+这一课的目标是学习列表的基本结构。你学到了列表是由头和尾组成的，通过`cons`连接在一起。我们还在列表中介绍了许多最常用的函数。现在来做一下习题吧。
+
+**Q6.1** Haskell有一个名为`repeat`的函数，它接受一个值并无限地重复该值。使用你已经学过的函数实现你自己版本的`repeat`。 
+
+
+**Q6.2** 编写一个函数subseq，它接受三个参数:起始位置、结束位置和列表。该函数应该返回起始和结束之间的子序列。例如:
+```
+GHCi> subseq 2 5 [1 .. 10]
+[3,4,5]
+GHCi> subseq 2 7 "a puppy"
+"puppy"
+```
+**Q6.3** 编写一个`inFirstHalf`函数，当元素位于列表的前半部分时返回`True`，否则返回`False`。 
